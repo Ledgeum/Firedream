@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Navbar.module.css';
 
 export default function Navbar({ cartCount = 0 }) {
@@ -16,9 +17,14 @@ export default function Navbar({ cartCount = 0 }) {
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoFire}>FIRE</span>
-          <span className={styles.logoDream}>DREAM</span>
-          <span className={styles.logoDot}>.</span>
+          <Image
+            src="/logo.png"
+            alt="FireDream"
+            width={160}
+            height={48}
+            style={{ objectFit: 'contain', objectPosition: 'left center' }}
+            priority
+          />
         </Link>
 
         <ul className={`${styles.links} ${menuOpen ? styles.open : ''}`}>

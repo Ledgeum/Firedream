@@ -25,28 +25,19 @@
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 0.05em;
   display: flex;
-  align-items: baseline;
-  gap: 0;
+  align-items: center;
+  height: 48px;
+  width: 160px;
+  flex-shrink: 0;
 }
 
-.logoFire {
-  color: var(--fire-orange);
-  animation: flicker 8s infinite;
+.logo img {
+  transition: opacity 0.2s ease;
 }
 
-.logoDream {
-  color: var(--bone-white);
-}
-
-.logoDot {
-  color: var(--fire-red);
-  font-size: 36px;
-  line-height: 1;
-  margin-left: 1px;
+.logo:hover img {
+  opacity: 0.85;
 }
 
 .links {
