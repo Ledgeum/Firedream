@@ -20,8 +20,8 @@ export default function Navbar({ cartCount = 0 }) {
           <Image
             src="/logo.png"
             alt="FireDream"
-            width={160}
-            height={48}
+            width={320}
+            height={96}
             style={{ objectFit: 'contain', objectPosition: 'left center' }}
             priority
           />
