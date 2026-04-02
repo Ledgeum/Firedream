@@ -1,0 +1,39 @@
+.main {
+  min-height: 100vh;
+  padding: 160px 0 80px;
+  background: var(--char-black);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: var(--bone-white);
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+}
+
+.empty {
+  color: var(--ash-gray);
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.back {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--fire-orange);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.back:hover {
+  border-color: var(--fire-orange);
+}
