@@ -5,27 +5,23 @@ import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import Footer from '../components/Footer';
 import { products, categories } from '../data/products';
+import { useCart } from '../context/CartContext';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [cart, setCart] = useState([]);
   const [toast, setToast] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [cursorExpanded, setCursorExpanded] = useState(false);
+
+  const { addToCart, cartCount } = useCart();
 
   const filtered = activeCategory === 'all'
     ? products
     : products.filter(p => p.category === activeCategory);
 
-  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
   const handleAddToCart = (product) => {
-    setCart(prev => {
-      const existing = prev.find(i => i.id === product.id);
-      if (existing) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i);
-      return [...prev, { ...product, qty: 1 }];
-    });
+    addToCart(product);
     setToast(`${product.name} added to cart 🔥`);
     setTimeout(() => setToast(null), 2500);
   };
@@ -51,15 +47,11 @@ export default function Home() {
     <>
       <Head>
         <title>FireDream — Bold Snacks & Premium Lighters</title>
-        <meta name="description" content="FireDream — premium spicy snacks and lighters for those who live with intensity. Shop Inferno Chips, Blaze Jerky, Obsidian Torch, and more." />
+        <meta name="description" content="FireDream — premium spicy snacks and lighters for those who live with intensity." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content="FireDream Shop" />
-        <meta property="og:description" content="Bold snacks & premium lighters." />
-        <meta property="og:url" content="https://firedream.shop" />
       </Head>
 
-      {/* Custom cursor */}
       <div
         className={`cursor ${cursorExpanded ? 'expanded' : ''}`}
         style={{ left: cursorPos.x, top: cursorPos.y }}
@@ -68,10 +60,8 @@ export default function Home() {
       <Navbar cartCount={cartCount} />
 
       <main>
-        {/* Hero */}
         <Hero />
 
-        {/* Products */}
         <section id="products" className={styles.products}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
@@ -103,7 +93,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
         <section id="about" className={styles.about}>
           <div className={styles.container}>
             <div className={styles.aboutGrid}>
@@ -135,16 +124,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Banner */}
         <div className={styles.banner}>
           <div className={styles.bannerTrack}>
-            {['FREE SHIPPING OVER $40', '🔥', 'PREMIUM QUALITY', '🔥', 'BOLD FLAVORS', '🔥', 'SHIPS WORLDWIDE', '🔥', 'FREE SHIPPING OVER $40', '🔥', 'PREMIUM QUALITY', '🔥', 'BOLD FLAVORS', '🔥'].map((t, i) => (
+            {['FREE SHIPPING OVER $40', '🔥', 'PREMIUM QUALITY', '🔥', 'BOLD FLAVORS', '🔥', 'SHIPS WORLDWIDE', '🔥',
+              'FREE SHIPPING OVER $40', '🔥', 'PREMIUM QUALITY', '🔥', 'BOLD FLAVORS', '🔥'].map((t, i) => (
               <span key={i}>{t}</span>
             ))}
           </div>
         </div>
 
-        {/* Contact */}
         <section id="contact" className={styles.contact}>
           <div className={styles.container}>
             <div className={styles.contactInner}>
@@ -161,12 +149,7 @@ export default function Home() {
 
       <Footer />
 
-      {/* Toast */}
-      {toast && (
-        <div className={styles.toast}>
-          {toast}
-        </div>
-      )}
+      {toast && <div className={styles.toast}>{toast}</div>}
     </>
   );
 }
