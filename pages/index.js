@@ -114,8 +114,8 @@ export default function Home() {
               <p className={styles.sectionEyebrow}>GET IN TOUCH</p>
               <h2 className={styles.sectionTitle}>CONTACT US</h2>
               <p className={styles.contactSub}>Questions? Wholesale inquiries? Drop us a line.</p>
-              <a href="mailto:hello@firedream.shop" className={styles.contactEmail}>
-                hello@firedream.shop
+              <a href="mailto:office@firedream.shop" className={styles.contactEmail}>
+                office@firedream.shop
               </a>
             </div>
           </div>
