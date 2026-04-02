@@ -11,9 +11,6 @@ import styles from '../styles/Home.module.css';
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [toast, setToast] = useState(null);
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
-  const [cursorExpanded, setCursorExpanded] = useState(false);
-
   const { addToCart, cartCount } = useCart();
 
   const filtered = activeCategory === 'all'
@@ -26,23 +23,6 @@ export default function Home() {
     setTimeout(() => setToast(null), 2500);
   };
 
-  useEffect(() => {
-    const move = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
-    const over = (e) => {
-      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
-        setCursorExpanded(true);
-      } else {
-        setCursorExpanded(false);
-      }
-    };
-    window.addEventListener('mousemove', move);
-    window.addEventListener('mouseover', over);
-    return () => {
-      window.removeEventListener('mousemove', move);
-      window.removeEventListener('mouseover', over);
-    };
-  }, []);
-
   return (
     <>
       <Head>
@@ -51,11 +31,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div
-        className={`cursor ${cursorExpanded ? 'expanded' : ''}`}
-        style={{ left: cursorPos.x, top: cursorPos.y }}
-      />
 
       <Navbar cartCount={cartCount} />
 
